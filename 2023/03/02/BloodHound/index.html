@@ -6,12 +6,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Archive - Hexo</title>
+  <title>BloodHound - Hexo</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate" />
-  
-  
+  <meta name="keywords" content=", 内网学习, 工具使用">
+  <meta name="description" content="BloodHound使用可视化的图形来展示活动目录之间...">
   <meta name="author" content="John Doe">
   <link rel="icon" href="/images/icons/16x16.png" type="image/png" sizes="16x16">
   <link rel="icon" href="/images/icons/32x32.png" type="image/png" sizes="32x32">
@@ -152,7 +152,7 @@
         <i class="iconfont iconsearch j-navbar-search"></i>
       
     </div>
-    <div class="center">归档</div>
+    <div class="center">BloodHound</div>
     <div class="right">
       <i class="iconfont iconmenu j-navbar-menu"></i>
     </div>
@@ -172,7 +172,7 @@
       </li><li class="menu-item">
         <a href="/galleries/ " class="underline "> 随拍</a>
       </li><li class="menu-item">
-        <a href="/archives/ " class="underline active"> 归档</a>
+        <a href="/archives/ " class="underline "> 归档</a>
       </li><li class="menu-item">
         <a href="/tags/ " class="underline "> 标签</a>
       </li><li class="menu-item">
@@ -186,41 +186,104 @@
   </div>
 </nav>
   <main id="main">
-  <section class="archive">
-    <div class="archive-container">
-      <div class="archive-post">
-        <h3 class="archive-total">归档: 4 篇</h3>
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/blog-pictures/04.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">BloodHound</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 02, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>634</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="BloodHound"><a href="#BloodHound" class="headerlink" title="BloodHound"></a>BloodHound</h1><p><font color='red'>使用可视化的图形来展示活动目录之间的关系</font></p>
+<p>通过图形，将域用户、计算机、组、对话、ACL之间的关系展现出来</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先需要安装<font color='red'>java环境</font></p>
+<p>其次需要安装<font color='cornflowerblue'>Neo4j数据库</font></p>
+<p>最后运行bloodhound</p>
+<p>安装Neo4j数据库</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-built_in">get</span> install neo4j<br></code></pre></td></tr></table></figure>
+
+
+
+<p>启动数据库</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">neo4j <span class="hljs-literal">start</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>然后浏览器访问，默认账号密码是neo4j，登陆之后要求重置密码</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">7474</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>下载bloodhound</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/BloodHoundAD/</span>BloodHound/releases<br></code></pre></td></tr></table></figure>
+
+
+
+<p>解压之后执行</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">./BloodHound</span> <span class="hljs-params">--no-sandbox</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>然后会弹出弹窗，输入之前数据库的账号密码即可</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230228103735813.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230228103735813</span></p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>bloodhound</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230228114729306.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230228114729306</span></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>两种方法</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">一种是powershell脚本<span class="hljs-keyword">sharphound.ps1</span><br><span class="hljs-keyword"></span><br>powershell -exec <span class="hljs-keyword">bypass </span>-command <span class="hljs-string">&quot;Import-Module ./SharpHound.ps1; Invoke-BloodHound -c all&quot;</span><br><br>一种是<span class="hljs-keyword">sharphound.exe</span><br><span class="hljs-keyword"></span><br><span class="hljs-keyword">SharpHound.exe </span>-c all<br></code></pre></td></tr></table></figure>
+
+
+
+<p>运行之后会生成ZIP压缩包</p>
+<p><font color='cornflowerblue'>把压缩包导入bloodhound即可</font></p>
+
+      </section>
+      <section class="extra">
         
         
-          
-            <h3 class="archive-year">2023 年</h3>
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/02/BloodHound/">March 02</a>
-            <a class="archive-title" href="/2023/03/02/BloodHound/">BloodHound</a>
-          </div>
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E5%AD%A6%E4%B9%A0/" rel="tag">内网学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" rel="tag">工具使用</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a></a>
+    <a href="/2023/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/">数据库提权<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
         
           
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/">March 02</a>
-            <a class="archive-title" href="/2023/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/">数据库提权</a>
-          </div>
-        
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/02/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86/">March 02</a>
-            <a class="archive-title" href="/2023/03/02/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86/">端口转发与内网代理</a>
-          </div>
-        
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/02/win%20to%20win%E6%A8%AA%E5%90%91/">March 02</a>
-            <a class="archive-title" href="/2023/03/02/win%20to%20win%E6%A8%AA%E5%90%91/">win to win横向</a>
-          </div>
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BloodHound"><span class="toc-text">BloodHound</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol></li></ol>
+  </aside>
+
         
       </div>
     </div>
-  </section>
+  </div>
 </main>
   
 

