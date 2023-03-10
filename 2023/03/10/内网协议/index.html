@@ -6,12 +6,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Archive - Charmy&#39;s blog: 2023</title>
+  <title>内网协议 - Charmy&#39;s blog</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate" />
-  
-  
+  <meta name="keywords" content=", 内网学习, 协议">
+  <meta name="description" content="主要是介绍一些内网用到的一些协议 不包括Kerbero...">
   <meta name="author" content="John Doe">
   <link rel="icon" href="/images/icons/16x16.png" type="image/png" sizes="16x16">
   <link rel="icon" href="/images/icons/32x32.png" type="image/png" sizes="32x32">
@@ -152,7 +152,7 @@
         <i class="iconfont iconsearch j-navbar-search"></i>
       
     </div>
-    <div class="center">归档</div>
+    <div class="center">内网协议</div>
     <div class="right">
       <i class="iconfont iconmenu j-navbar-menu"></i>
     </div>
@@ -186,59 +186,128 @@
   </div>
 </nav>
   <main id="main">
-  <section class="archive">
-    <div class="archive-container">
-      <div class="archive-post">
-        <h3 class="archive-total">归档: 7 篇</h3>
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/blog-pictures/07.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">内网协议</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 10, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>956</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p><strong><font color='red'>主要是介绍一些内网用到的一些协议 不包括Kerberos和NTLM</font></strong></p>
+<h1 id="LDAP"><a href="#LDAP" class="headerlink" title="LDAP"></a>LDAP</h1><p>轻量型目录访问协议</p>
+<p>用于通过分层目录结构对数据进行存储与检索</p>
+<p>是一种用来查询与更新AD DS的目录服务通信协议</p>
+<p>AD DS使用LDAP名称路径来显示对象AD DS内的位置</p>
+<p><strong>LDAP主要是用来进行读取的协议    一般不进行写    因为其读高效 写低效</strong></p>
+<h1 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h1><p>SMB(Server Message Block)文件共享协议</p>
+<p>SMB协议又名为CIFS协议</p>
+<p>开放在445端口</p>
+<p>SMB协议在域内和域外是不同的</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">域内SMB走Kerberos协议<br><br>域外SMB走NTLM协议<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="WPAD"><a href="#WPAD" class="headerlink" title="WPAD"></a>WPAD</h1><p>WPAD(Web Proxy Auto-Discovery Protocol)网络代理自动发现协议</p>
+<p>一种客户端使用DHCP或DNS发现方法来定位一个配置文件URL的方法。在检测和下载配置文件后，它可以执行配置文件以测定特定URL应使用的代理</p>
+<p>通过让浏览器自动发现代理服务器，定位代理配置文件，下载编译并运行，最终自动使用代理访问网络</p>
+<p>简而言之,就是代理时,会用到这个协议</p>
+<h1 id="LLMNR"><a href="#LLMNR" class="headerlink" title="LLMNR"></a>LLMNR</h1><p>LLMNR(Link-Local Multicast Name Resolution)链路本地多播名称解析</p>
+<p>是一个基于域名系统数据包格式的协议</p>
+<p>将局域网内IPV4和IPV6的主机进行名称解析为同一本地链路上的主机,也称作多播DNS</p>
+<p>端口为UDP的5355端口</p>
+<p>支持Windows vista及其以后的版本</p>
+<p>简而言之,就是类似一个地址解析协议</p>
+<h1 id="NetBIOS"><a href="#NetBIOS" class="headerlink" title="NetBIOS"></a>NetBIOS</h1><p>NetBIOS(Network Basic Input/Output System)网络基本输入输出系统</p>
+<p>NetBIOS不是一种网络协议，而是应用程序接口（API）</p>
+<p>它提供了OSI模型中的会话层服务，让在不同电脑上运行的不同程序，可以在局域网中，互相连线，以及分享资料</p>
+<p>NetBIOS提供的主要服务</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230310173911641.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230310173911641</span></p>
+<h1 id="NBNS"><a href="#NBNS" class="headerlink" title="NBNS"></a>NBNS</h1><p>NBNS(NetBIOS name service)</p>
+<p>NetBIOS提供的名称服务,可以将名称映射到IP地址</p>
+<p>支持IPV4    不支持IPV6</p>
+<p>也是类似一种地址解析协议</p>
+<p>支持Windows NT及其高版本</p>
+<p>几乎所有的局域网都是在NBNS协议基础之上</p>
+
+      </section>
+      <section class="extra">
         
         
-          
-            <h3 class="archive-year">2023 年</h3>
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/10/%E5%86%85%E7%BD%91%E5%8D%8F%E8%AE%AE/">March 10</a>
-            <a class="archive-title" href="/2023/03/10/%E5%86%85%E7%BD%91%E5%8D%8F%E8%AE%AE/">内网协议</a>
-          </div>
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E5%AD%A6%E4%B9%A0/" rel="tag">内网学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8F%E8%AE%AE/" rel="tag">协议</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a></a>
+    <a href="/2023/03/06/BoredHackerBlog-Social%20Network/">BoredHackerBlog-Social Network靶场<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<div id="valine"></div>
+<script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  window.onload = function () {
+    var loadValine = function () {
+      new Valine({
+        el: '#valine',
+        app_id: "MolKGIamzoTNkVe0GP3Zbi0H-gzGzoHsz",
+        app_key: "AFgQCxzt4SDNIbcm1yz6eUVc",
+        placeholder: "你好",
+        avatar: "mp",
+        pageSize: "10",
+        lang: "zh-CN",
+      });
+    }
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        loadValine();
+      });
+    } else {
+      loadValine();
+    }
+  };
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
         
           
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/06/BoredHackerBlog-Social%20Network/">March 06</a>
-            <a class="archive-title" href="/2023/03/06/BoredHackerBlog-Social%20Network/">BoredHackerBlog-Social Network靶场</a>
-          </div>
-        
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/04/Kerberos%E6%94%BB%E5%87%BB/">March 04</a>
-            <a class="archive-title" href="/2023/03/04/Kerberos%E6%94%BB%E5%87%BB/">Kerberos攻击</a>
-          </div>
-        
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/02/BloodHound/">March 02</a>
-            <a class="archive-title" href="/2023/03/02/BloodHound/">BloodHound</a>
-          </div>
-        
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/">March 02</a>
-            <a class="archive-title" href="/2023/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/">数据库提权</a>
-          </div>
-        
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/02/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86/">March 02</a>
-            <a class="archive-title" href="/2023/03/02/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86/">端口转发与内网代理</a>
-          </div>
-        
-          
-          <div class="archive-item">
-            <a class="archive-date" href="/2023/03/02/win%20to%20win%E6%A8%AA%E5%90%91/">March 02</a>
-            <a class="archive-title" href="/2023/03/02/win%20to%20win%E6%A8%AA%E5%90%91/">win to win横向</a>
-          </div>
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LDAP"><span class="toc-text">LDAP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SMB"><span class="toc-text">SMB</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WPAD"><span class="toc-text">WPAD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LLMNR"><span class="toc-text">LLMNR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NetBIOS"><span class="toc-text">NetBIOS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NBNS"><span class="toc-text">NBNS</span></a></li></ol>
+  </aside>
+
         
       </div>
     </div>
-  </section>
+  </div>
 </main>
   
 

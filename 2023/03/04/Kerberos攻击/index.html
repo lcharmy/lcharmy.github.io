@@ -198,7 +198,7 @@
     <div class="head-info">
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 04, 2023</span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>26845</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>26867</span>
     </div>
   </div>
 </section>
@@ -903,8 +903,7 @@
 <p>然后在win7上使用打印机服务漏洞攻击域控DC，使域控强制回连认证</p>
 <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode">SpoolSample.exe DC wi<span class="hljs-symbol">n7</span><br></code></pre></td></tr></table></figure>
 
-
-
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230308111007728.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230308111007728</span></p>
 <p>看到rebeus收到来自域控的票据</p>
 <p>票据里面是有换行符的，需要去掉</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">data=<span class="hljs-string">&quot;&quot;</span><br><span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;1.txt&#x27;</span>,<span class="hljs-string">&#x27;r&#x27;</span>):<br>    data += line.strip(<span class="hljs-string">&#x27;\n&#x27;</span>)<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;2.txt&quot;</span>,<span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(data)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;保存完毕&#x27;</span>)<br></code></pre></td></tr></table></figure>
